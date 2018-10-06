@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\alert",
+    "\\src\\app\\login",
+    "\\src\\logic",
+    "\\src\\services"
+  ],
+  "SelectedNode": "\\src\\app\\alert\\alert.component.ts",
+  "PreviewInSolutionExplorer": false
+}
