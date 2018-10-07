@@ -16,10 +16,10 @@ import { HomeComponent } from './home/home.component';
 //import { GuildFactionsComponent } from './guild-factions/guild-factions.component';
 //import { GuildPlayersComponent } from './guild-players/guild-players.component';
 import { LoginComponent } from './login/login.component';
+import { AlertComponent } from './alert/alert.component';
 
 //import { HTTP_INTERCEPTORS } from '@angular/common/http';
 //import { AuthInterceptor } from './../logic/auth.interceptor';
-//import { AlertComponent } from './alert/alert.component';
 //import { AuthGuard } from '../logic/auth.guard';
 import { AlertService } from '../services/alert.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -28,12 +28,12 @@ import { AuthenticationService } from '../services/authentication.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    GuildSelectorComponent,
-    AboutComponent,
-    GuildSettingsComponent,
-    GuildRegionsComponent,
-    GuildFactionsComponent,
-    GuildPlayersComponent,
+    //GuildSelectorComponent,
+    //AboutComponent,
+    //GuildSettingsComponent,
+    //GuildRegionsComponent,
+    //GuildFactionsComponent,
+    //GuildPlayersComponent,
     LoginComponent,
     AlertComponent
   ],
@@ -45,14 +45,14 @@ import { AuthenticationService } from '../services/authentication.service';
     RouterModule.forRoot(routerConfig)
   ],
   providers: [
-    AuthGuard,
+    //AuthGuard,
     AlertService,
     AuthenticationService,
-    {
-    provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-    multi: true
-    }
+    //{
+    //provide: HTTP_INTERCEPTORS,
+    //  useClass: AuthInterceptor,
+    //multi: true
+    //}
   ],
   bootstrap: [
     AppComponent
