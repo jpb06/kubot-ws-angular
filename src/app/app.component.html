@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top custom-nav-bar">
+  <i class="fa fa-cog fa-2x" routerLink="home"></i>
+  <h5 class="ml-auto" routerLink="home">kubot guild configuration</h5>
+  <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#collapsedContent" aria-controls="collapsedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse" id="collapsedContent">
+    <ul class="nav navbar-nav ml-auto" routerLinkActive="active">
+      <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="guild">Guild</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container-fluid">
+  <alert></alert>
+  <router-outlet></router-outlet>
+</main>
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+  </div>
+</footer>
