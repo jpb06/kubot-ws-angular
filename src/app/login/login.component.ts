@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { AlertService, AlertType } from '../../services/alert.service';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   async login() {
     this.alertService.clear();
@@ -30,8 +31,8 @@ export class LoginComponent implements OnInit {
       }, 0);
     } else {
       try {
-        let authResult = await this.authenticationService.login(this.guildId, this.password).toPromise();
-        console.log(authResult);
+        let authResult = await this.authenticationService.login(this.guildId, this.password)
+        this.router.navigate(['guild']);
 
       } catch (error) {
         if (error.status === 401) {
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
         } else if (error.status === 404) {
           this.alertService.report('Network error : could not reach API.', AlertType.Exception);
         } else {
-          this.alertService.exception(error);
+          this.alertService.report('An error occured.', AlertType.Exception);
         }
       }
     }
