@@ -10,13 +10,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  isCollapsed = false;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
+
+  isLoggedIn() {
+    return this.authenticationService.isLoggedIn();
+  }
 
   logout() {
     this.authenticationService.logout();

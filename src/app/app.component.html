@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top custom-nav-bar">
   <i class="fa fa-cog fa-2x" routerLink="home"></i>
-  <h5 class="ml-auto" routerLink="home">kubot guild configuration</h5>
+  <h5 class="ml-auto is-link" routerLink="home">kubot guild configuration</h5>
+  <form class="form-inline ml-3">
+    <button *ngIf="!isLoggedIn()" class="btn btn-outline-success" type="button" [routerLink]="['login']">Login</button>
+    <button *ngIf="isLoggedIn()" class="btn btn-outline-success" type="button" (click)="logout()">Logout</button>
+  </form>
   <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#collapsedContent" aria-controls="collapsedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="navbar-collapse collapse" id="collapsedContent">
-    <ul class="nav navbar-nav ml-auto" routerLinkActive="active">
-      <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="guild">Guild</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
-      <li class="nav-item"><a class="nav-link" (click)="logout()">Log out</a></li>
-    </ul>
+    <app-menu-guest class="ml-auto" *ngIf="!isLoggedIn()"></app-menu-guest>
+    <app-menu-user class="ml-auto" *ngIf="isLoggedIn()"></app-menu-user>
   </div>
 </nav>
 <main class="container-fluid">
@@ -19,6 +19,6 @@
 </main>
 <footer class="footer">
   <div class="container">
-    <span class="text-muted">Place sticky footer content here.</span>
+    <span class="text-muted">kubot guild configuration utility.</span>
   </div>
 </footer>
