@@ -26,4 +26,12 @@ export class AuthenticationService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
   }
+
+  isLoggedIn() {
+    if (localStorage.getItem('id_token') && localStorage.getItem('expires_at')) {
+      return true;
+    }
+
+    return false;
+  }
 }
