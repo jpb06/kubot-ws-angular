@@ -19,6 +19,11 @@ import { AuthGuard } from '../logic/auth.guard';
 import { AlertService } from '../services/alert.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { GuildHomeComponent } from './guild-home/guild-home.component';
+import { MenuGuestComponent } from './main-menu/menu-guest/menu-guest.component';
+import { MenuUserComponent } from './main-menu/menu-user/menu-user.component';
+import { AboutComponent } from './about/about.component';
+import { GuildFactionsComponent } from './guild-factions/guild-factions.component';
+import { GuildRegionsComponent } from './guild-regions/guild-regions.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { GuildHomeComponent } from './guild-home/guild-home.component';
     HomeComponent,
     LoginComponent,
     AlertComponent,
-    GuildHomeComponent
+    GuildHomeComponent,
+    MenuGuestComponent,
+    MenuUserComponent,
+    AboutComponent,
+    GuildFactionsComponent,
+    GuildRegionsComponent
   ],
   imports: [
     BrowserModule,
