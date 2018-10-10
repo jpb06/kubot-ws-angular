@@ -23,7 +23,7 @@ export class AuthenticationService {
     if (req && req.status === 'Success' && req.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('id_token', req.token);
-      localStorage.setItem('expiration_date', req.expirationDate);
+      localStorage.setItem('expiration_date', JSON.parse(req.expirationDate));
     }
 
     return true;
