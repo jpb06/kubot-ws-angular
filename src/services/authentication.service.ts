@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as moment from "moment";
+import { ExpirationService } from './expiration.service';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private expirationService: ExpirationService
+  ) { }
 
   async login(guildId: string, password: string) {
 
@@ -12,10 +15,8 @@ export class AuthenticationService {
 
     if (req && req.status === 'Success' && req.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      const expiresAt = moment().add(req.expiresIn, 'second');
-
       localStorage.setItem('id_token', req.token);
-      localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+      localStorage.setItem('expiration_date', req.expirationDate);
     }
 
     return true;
@@ -24,12 +25,13 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    localStorage.removeItem('expiration_date');
   }
 
   isLoggedIn() {
-    if (localStorage.getItem('id_token') && localStorage.getItem('expires_at')) {
-      return true;
+    let rawExpirationDate = localStorage.getItem('expiration_date');
+    if (localStorage.getItem('id_token') && rawExpirationDate) {
+      return this.expirationService.validate(rawExpirationDate);
     }
 
     return false;
