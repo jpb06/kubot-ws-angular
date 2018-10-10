@@ -11,7 +11,14 @@ export class AuthenticationService {
 
   async login(guildId: string, password: string) {
 
-    let req = await this.http.post<any>(`http://localhost:1337/api/ws/login`, { login: guildId, password: password }).toPromise();
+    let req = await this.http.post<any>(
+      `http://localhost:1337/api/ws/login`,
+      {
+        login: guildId,
+        password: password,
+        expiresIn: 5 * 60
+      }
+    ).toPromise();
 
     if (req && req.status === 'Success' && req.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
