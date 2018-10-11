@@ -1,0 +1,36 @@
+.rich-menu-item > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rich-menu-item > span {
+  padding-left: 5px;
+}
+
+.rich-menu-item {
+  border-radius: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  line-height: 38px;
+}
+
+.rich-menu-item:hover {
+  color: #28a745;
+}
+
+.active-route {
+  background-color: #28a745;
+  color: #464746;
+}
+
+.active-route:hover {
+  color: #000000;
+}
+
+.is-link {
+  cursor: pointer;
+}
+
+.collapse.show {
+  margin-top: 15px;
+}

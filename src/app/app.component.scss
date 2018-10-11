@@ -1,0 +1,27 @@
+.navbar > h5 {
+  color: #fff;
+}
+.navbar > i {
+  padding-right:10px;
+  color:white;
+}
+.navbar-toggler-icon {
+  color: white !important;
+}
+
+.custom-nav-bar {
+  background-color: #0a536f;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #0a536f;
+}
+
+.is-link {
+  cursor: pointer;
+}

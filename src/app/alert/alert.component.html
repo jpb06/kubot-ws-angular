@@ -1,0 +1,11 @@
+<div
+     [@alert]="message ? 'open' : 'closed'"
+     [ngClass]="{
+      'alert': message, 
+      'alert-success': alertType.Success === type,
+      'alert-auth-failure': alertType.AuthFailure === type,
+      'alert-dark': alertType.Neutral === type,
+      'alert-light': alertType.Exception === type
+     }" role="alert">
+  <i class="fa fa-exclamation-circle fa-2x"></i><span>{{message}}</span>
+</div>
