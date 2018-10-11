@@ -24,7 +24,7 @@ import { MenuUserComponent } from './main-menu/menu-user/menu-user.component';
 import { AboutComponent } from './about/about.component';
 import { GuildFactionsComponent } from './guild-factions/guild-factions.component';
 import { GuildRegionsComponent } from './guild-regions/guild-regions.component';
-import { ExpirationService } from '../services/expiration.service';
+import { DateService } from '../services/date.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { ExpirationService } from '../services/expiration.service';
     AuthGuard,
     AlertService,
     AuthenticationService,
-    ExpirationService,
+    DateService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [

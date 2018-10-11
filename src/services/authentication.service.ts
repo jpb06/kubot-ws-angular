@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExpirationService } from './expiration.service';
+import { DateService } from './date.service';
 
 @Injectable()
 export class AuthenticationService {
   constructor(
     private http: HttpClient,
-    private expirationService: ExpirationService
+    private dateService: DateService
   ) { }
 
   async login(guildId: string, password: string) {
@@ -38,7 +38,7 @@ export class AuthenticationService {
   isLoggedIn() {
     let rawExpirationDate = localStorage.getItem('expiration_date');
     if (localStorage.getItem('id_token') && rawExpirationDate) {
-      return this.expirationService.validate(rawExpirationDate);
+      return this.dateService.isExpired(rawExpirationDate);
     }
 
     return false;
