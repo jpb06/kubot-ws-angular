@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 
@@ -17,7 +17,8 @@ import { AuthInterceptor } from './../logic/auth.interceptor';
 
 import { AuthGuard } from '../logic/auth.guard';
 import { AlertService } from '../services/alert.service';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/api/authentication.service';
+import { KubotService } from '../services/api/kubot.service';
 import { GuildHomeComponent } from './guild-home/guild-home.component';
 import { MenuGuestComponent } from './main-menu/menu-guest/menu-guest.component';
 import { MenuUserComponent } from './main-menu/menu-user/menu-user.component';
@@ -43,6 +44,7 @@ import { DateService } from '../services/date.service';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routerConfig)
   ],
@@ -50,6 +52,7 @@ import { DateService } from '../services/date.service';
     AuthGuard,
     AlertService,
     AuthenticationService,
+    KubotService,
     DateService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
