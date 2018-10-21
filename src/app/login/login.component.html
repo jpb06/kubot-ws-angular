@@ -1,11 +1,18 @@
-<div class="form-group">
-  <label for="guildId">Guild identifier</label>
-  <input type="text" class="form-control" id="guildId" aria-describedby="guildIdHelp" placeholder="Enter the identifier of your guild" [(ngModel)]="guildId">
-  <small id="guildIdHelp" class="form-text text-muted">You can find this identifier by activating developper mode on discord and right clicking on your guild.</small>
+<div class="card text-white bg-darkblue mb-3">
+  <div class="card-header bg-greyblue">Authentication</div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="guildId">Guild identifier</label>
+      <input type="text" class="form-control" id="guildId" aria-describedby="guildIdHelp" placeholder="Enter the identifier of your guild" [(ngModel)]="guildId">
+      <small id="guildIdHelp" class="form-text text-info">You can find this identifier by activating developper mode on discord and right clicking on your guild.</small>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter your password" [(ngModel)]="password">
+      <small id="passwordHelp" class="form-text text-info">The password was given to you in your discord guild admin channel.</small>
+    </div>
+  </div>
+  <div class="card-footer bg-greyblue">
+    <button type="button" class="btn btn-primary" (click)="login();">Submit</button>
+  </div>
 </div>
-<div class="form-group">
-  <label for="password">Password</label>
-  <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter your password" [(ngModel)]="password">
-  <small id="passwordHelp" class="form-text text-muted">The password was given to you in your discord guild admin channel.</small>
-</div>
-<button type="button" class="btn btn-primary" (click)="login();">Submit</button>
