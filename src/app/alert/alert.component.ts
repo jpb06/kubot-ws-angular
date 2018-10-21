@@ -43,6 +43,8 @@ export class AlertComponent implements OnInit, OnDestroy {
       if (alert) {
         this.message = alert.message;
         this.type = alert.type;
+
+        window.scrollTo(0, 0);
       } else {
         this.message = undefined;
         this.type = undefined;

@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DateService } from './date.service';
+import { DateService } from './../date.service';
+import { BaseApiService } from './base/base.api.service';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService extends BaseApiService {
   constructor(
     private http: HttpClient,
     private dateService: DateService
-  ) { }
+  ) {
+    super();
+  }
 
-  async login(guildId: string, password: string) {
+  async login(
+    guildId: string,
+    password: string
+  ): Promise<any> {
 
     let req = await this.http.post<any>(
-      `http://localhost:1337/api/ws/login`,
+      `${this.host}/api/ws/login`,
       {
         login: guildId,
         password: password,
@@ -20,8 +26,9 @@ export class AuthenticationService {
       }
     ).toPromise();
 
-    if (req && req.status === 'Success' && req.token) {
+    if (req && req.status === 200 && req.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
+      localStorage.setItem('guild_id', guildId);
       localStorage.setItem('id_token', req.token);
       localStorage.setItem('expiration_date', JSON.parse(req.expirationDate));
     }
@@ -31,16 +38,21 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
+    localStorage.removeItem('guild_id');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expiration_date');
   }
 
   isLoggedIn() {
     let rawExpirationDate = localStorage.getItem('expiration_date');
-    if (localStorage.getItem('id_token') && rawExpirationDate) {
+    if (localStorage.getItem('id_token') && localStorage.getItem('guild_id') && rawExpirationDate) {
       return this.dateService.isExpired(rawExpirationDate);
     }
 
     return false;
+  }
+
+  getGuildId() {
+    return localStorage.getItem('guild_id');
   }
 }

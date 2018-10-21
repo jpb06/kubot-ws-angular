@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as $ from "jquery"
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/api/authentication.service';
 import { Router } from '@angular/router';
 
 @Component({

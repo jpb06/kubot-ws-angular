@@ -1,3 +1,91 @@
-<p>
-  guild-home works!
-</p>
+<form [formGroup]="guildForm" (ngSubmit)="saveConfig()">
+  <div class="card text-white bg-darkblue mb-3">
+    <div class="card-header bg-greyblue">Channels</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm">
+          <label for="adminChannel">Admin channel</label>
+          <input type="text" class="form-control" id="adminChannel" aria-describedby="adminChannelHelp" placeholder="Enter the name of a text channel belonging to your guild"
+                 formControlName="adminChannel" [ngClass]="{'invalid-input': !this.guildForm.get('adminChannel').valid}">
+          <small id="adminChannelHelp" class="form-text text-info">Admin commands used to manage the bot for your guild will be restricted to this channel.</small>
+        </div>
+        <div class="col-sm">
+          <label for="mainChannel">Main channel</label>
+          <input type="text" class="form-control" id="mainChannel" aria-describedby="mainChannelHelp" placeholder="Enter the name of a text channel belonging to your guild"
+                 formControlName="mainChannel" [ngClass]="{'invalid-input': !this.guildForm.get('mainChannel').valid}">
+          <small id="mainChannelHelp" class="form-text text-info">This channel will be the one used for most commands, like scan, for example.</small>
+        </div>
+        <div class="col-sm">
+          <label for="emergencyChannel">Emergency channel</label>
+          <input type="text" class="form-control" id="emergencyChannel" aria-describedby="emergencyChannelHelp" placeholder="Enter the name of a text channel belonging to your guild"
+                 formControlName="emergencyChannel" [ngClass]="{'invalid-input': !this.guildForm.get('emergencyChannel').valid}">
+          <small id="emergencyChannelHelp" class="form-text text-info">This channel will be used for emergency messages; can be the same as main channel.</small>
+        </div>
+      </div>
+    </div>
+    <div class="card-header bg-greyblue">Bot settings</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm">
+          <label for="commandsPrefix">Commands prefix</label>
+          <input type="text" class="form-control" id="commandsPrefix" aria-describedby="commandsPrefixHelp" placeholder="Enter any text (short, preferably)"
+                 formControlName="commandsPrefix" [ngClass]="{'invalid-input': !this.guildForm.get('commandsPrefix').valid}">
+          <small id="commandsPrefixHelp" class="form-text text-info">This will set the prefix to be used for kubot commands in your guild.</small>
+        </div>
+        <div class="col-sm">
+          <label for="activityNoticeMinPlayers">Activity notice minimum players count</label>
+          <input type="number" class="form-control" id="activityNoticeMinPlayers" aria-describedby="activityNoticeMinPlayersHelp" placeholder="Enter a number"
+                 formControlName="activityNoticeMinPlayers" [ngClass]="{'invalid-input': !this.guildForm.get('activityNoticeMinPlayers').valid}">
+          <small id="activityNoticeMinPlayersHelp" class="form-text text-info">This number will define the minimum players count triggering activity notices.</small>
+        </div>
+      </div>
+    </div>
+    <div class="card-header bg-greyblue">Messages customization</div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-sm">
+          <label for="scanRegionName">Scan region name</label>
+          <input type="text" class="form-control" id="scanRegionName" aria-describedby="scanRegionNameHelp" placeholder="Enter a territorial description (for example: Sirius Sector)"
+                 formControlName="scanRegionName" [ngClass]="{'invalid-input': !this.guildForm.get('scanRegionName').valid}">
+          <small id="scanRegionNameHelp" class="form-text text-info">This text will appear in the scan command response message.</small>
+        </div>
+        <div class="col-sm">
+          <label for="acknowledgedMessage">Acknowledged text</label>
+          <input type="text" class="form-control" id="acknowledgedMessage" aria-describedby="acknowledgedMessageHelp" placeholder="Enter the text kubot will be using to confirm an order"
+                 formControlName="acknowledgedMessage" [ngClass]="{'invalid-input': !this.guildForm.get('acknowledgedMessage').valid}">
+          <small id="acknowledgedMessageHelp" class="form-text text-info">This text will appear in the bot responses.</small>
+        </div>
+        <div class="col-sm">
+          <label for="footerText">Footer text</label>
+          <input type="text" class="form-control" id="footerText" aria-describedby="footerTextHelp" placeholder="Enter any text"
+                 formControlName="footerText" [ngClass]="{'invalid-input': !this.guildForm.get('footerText').valid}">
+          <small id="footerTextHelp" class="form-text text-info">This text will appear in the footer of every message kubot generates for your guild.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="activityNoticeMessages">Activity notice messages</label>
+        <select id="selectedActivityNoticeMessages" class="custom-select" size="6" aria-describedby="selectedActivityNoticeMessagesHelp" placeholder="Activity notice messages"
+                formControlName="selectedActivityNoticeMessages" multiple [ngClass]="{'invalid-input': this.allActivityNoticeMessages.length === 0}">
+          <option *ngFor="let value of allActivityNoticeMessages"
+                  [ngValue]="value">
+            {{ value }}
+          </option>
+        </select>
+        <button type="button" class="btn btn-primary mt-1 mb-1" (click)="removeSelectedNoticeMessages();">Remove selected</button>
+        <button type="button" class="btn btn-primary ml-1 mt-1 mb-1" (click)="removeAllNoticeMessages();">Remove all</button>
+        <input type="text" class="form-control" id="activityNoticeMessage" placeholder="Enter any text" formControlName="activityNoticeMessage">
+        <button type="button" class="btn btn-primary mt-1" (click)="AddNoticeMessage();">Add</button>
+        <small id="selectedActivityNoticeMessagesHelp" class="form-text text-info mb-1">A random message will be chosen among those for every activity notice.</small>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input type="text" class="form-control" id="imageUrl" aria-describedby="imageUrlHelp" placeholder="Enter an url"
+               formControlName="imageUrl" [ngClass]="{'invalid-input': !this.guildForm.get('imageUrl').valid}">
+        <small id="imageUrlHelp" class="form-text text-info">This image will appear in every message kubot sends to your guild. A squared image is best for display purposes.</small>
+      </div>
+    </div>
+    <div class="card-footer bg-greyblue">
+      <button type="submit" class="btn btn-primary" [disabled]="guildForm.invalid">Submit</button>
+    </div>
+  </div>
+</form>
