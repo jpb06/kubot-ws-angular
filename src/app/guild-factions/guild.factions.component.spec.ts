@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GuildFactionsComponent } from './guild-factions.component';
+import { GuildFactionsComponent } from './guild.factions.component';
 
 describe('GuildFactionsComponent', () => {
   let component: GuildFactionsComponent;
