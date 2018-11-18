@@ -1,0 +1,44 @@
+.tag {
+  height: 30px;
+  background-color: gray;
+  border-radius: 30px;
+  min-width: 50px;
+  display: flex;
+  margin: 4px;
+  user-select: none;
+}
+
+.tag:hover {
+  background-color:darkgrey;
+}
+
+.tag .tag-type {
+  border-radius: 30px;
+  background-color: #17a2b8;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.tag .tag-value {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height:30px;
+}
+
+.tag .tag-close {
+  border-radius: 30px;
+  background-color: gray;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 30px;
+}
+
+.tag .tag-close:hover {
+  background-color: #28a745;
+}
