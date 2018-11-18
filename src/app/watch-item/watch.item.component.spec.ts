@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GuildRegionsComponent } from './guild-regions.component';
+import { WatchItemComponent } from './watch.item.component';
 
-describe('GuildRegionsComponent', () => {
-  let component: GuildRegionsComponent;
-  let fixture: ComponentFixture<GuildRegionsComponent>;
+describe('WatchItemComponent', () => {
+  let component: WatchItemComponent;
+  let fixture: ComponentFixture<WatchItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GuildRegionsComponent ]
+      declarations: [ WatchItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GuildRegionsComponent);
+    fixture = TestBed.createComponent(WatchItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

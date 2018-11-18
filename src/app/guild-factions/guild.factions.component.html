@@ -1,0 +1,70 @@
+<div class="card text-white bg-darkblue mb-3">
+  <div class="card-header bg-greyblue">Validating changes</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged" (click)="saveChanges()">Save factions configuration</button>
+      </div><div class="col">
+  <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to initial configuration</button>
+</div>
+    </div>
+
+      <small class="form-text text-info">Don't forget to save once your're done.</small>
+    </div>
+</div>
+<div class="card text-white bg-darkblue mb-3">
+  <div class="card-header bg-greyblue">Watched factions</div>
+  <div class="card-body">
+    <app-watched-faction-summary [watchedFactions]="watchedFactions"
+                                 (modified)="watchedFactionModified($event)" (removed)="watchedFactionRemoved($event)">
+    </app-watched-faction-summary>
+  </div>
+</div>
+<form [formGroup]="factionForm" (ngSubmit)="setFaction()">
+  <div class="card text-white bg-darkblue mb-3">
+    <div class="card-header bg-greyblue">{{factionFormTitle}}</div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="factionName">Faction name</label>
+        <input type="text" class="form-control" id="factionName" aria-describedby="factionNameHelp" placeholder="Enter any name, really"
+               formControlName="factionName" [ngClass]="{'invalid-input': !this.factionForm.get('factionName').valid}" />
+        <small id="factionNameHelp" class="form-text text-info">This name will be displayed when a player using one of the tag(s) defined for the faction is detected.</small>
+      </div>
+      <div class="form-group">
+        <label for="factionTags">Tags</label>
+        <div class="tags-list">
+          <div class="row">
+            <div *ngIf="this.factionForm.get('watchedTags').value.length === 0" class="no-tags-defined">No watched tags defined for this faction</div>
+            <app-watch-item *ngFor="let tag of this.factionForm.get('watchedTags').value"
+                            [watchItem]="tag"
+                            (deleted)="watchItemDeleted($event)">
+            </app-watch-item>
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-info" type="button" (click)="addTag()">Add</button>
+          </div>
+          <input type="text" class="form-control" id="tag" placeholder="Enter a faction tag" aria-label="Tag to watch" aria-describedby="tagHelp" formControlName="tag" />
+
+        </div>
+        <small id="tagHelp" class="form-text text-info">This tag will be added to the watch list of this faction.</small>
+      </div>
+      <div class="form-group">
+        <label>Display mode</label><br />
+        <label class="switch">
+          <input type="checkbox" formControlName="alwaysDisplay">
+          <span class="slider round"></span>
+
+        </label>
+        <div *ngIf="this.factionForm.get('alwaysDisplay').value">Always displayed</div>
+        <div *ngIf="!this.factionForm.get('alwaysDisplay').value">Only when active</div>
+        <small id="displayModeHelp" class="form-text text-info">If you choose first option, the faction will show up in the scan report even if there is no member online.</small>
+      </div>
+    </div>
+    <div class="card-footer bg-greyblue">
+      <button type="submit" class="btn btn-primary" [disabled]="factionForm.invalid">{{formButtonText}}</button>&nbsp;
+      <button type="submit" class="btn btn-primary" (click)="cancelModify()" *ngIf="this.factionsSummaryChild.selectedIndex !== -1">Cancel</button>
+    </div>
+  </div>
+</form>

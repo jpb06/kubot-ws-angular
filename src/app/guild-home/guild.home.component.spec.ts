@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GuildFactionsComponent } from './guild-factions.component';
+import { GuildHomeComponent } from './guild.home.component';
 
-describe('GuildFactionsComponent', () => {
-  let component: GuildFactionsComponent;
-  let fixture: ComponentFixture<GuildFactionsComponent>;
+describe('GuildHomeComponent', () => {
+  let component: GuildHomeComponent;
+  let fixture: ComponentFixture<GuildHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GuildFactionsComponent ]
+      declarations: [ GuildHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GuildFactionsComponent);
+    fixture = TestBed.createComponent(GuildHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

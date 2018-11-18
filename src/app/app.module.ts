@@ -19,13 +19,15 @@ import { AuthGuard } from '../logic/auth.guard';
 import { AlertService } from '../services/alert.service';
 import { AuthenticationService } from '../services/api/authentication.service';
 import { KubotService } from '../services/api/kubot.service';
-import { GuildHomeComponent } from './guild-home/guild-home.component';
-import { MenuGuestComponent } from './main-menu/menu-guest/menu-guest.component';
-import { MenuUserComponent } from './main-menu/menu-user/menu-user.component';
+import { GuildHomeComponent } from './guild-home/guild.home.component';
+import { MenuGuestComponent } from './main-menu/menu-guest/menu.guest.component';
+import { MenuUserComponent } from './main-menu/menu-user/menu.user.component';
 import { AboutComponent } from './about/about.component';
-import { GuildFactionsComponent } from './guild-factions/guild-factions.component';
-import { GuildRegionsComponent } from './guild-regions/guild-regions.component';
+import { GuildFactionsComponent } from './guild-factions/guild.factions.component';
+import { GuildRegionsComponent } from './guild-regions/guild.regions.component';
 import { DateService } from '../services/date.service';
+import { WatchItemComponent } from './watch-item/watch.item.component';
+import { WatchedFactionSummaryComponent } from './watched-faction-summary/watched.faction.summary.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { DateService } from '../services/date.service';
     MenuUserComponent,
     AboutComponent,
     GuildFactionsComponent,
-    GuildRegionsComponent
+    GuildRegionsComponent,
+    WatchItemComponent,
+    WatchedFactionSummaryComponent
   ],
   imports: [
     BrowserModule,

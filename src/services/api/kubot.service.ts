@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GuildConfiguration } from './../../types/api/guild';
 import { BaseApiService } from './base/base.api.service';
+import { WatchedFaction } from '../../types/api/watched.faction';
 
 @Injectable()
 export class KubotService extends BaseApiService {
@@ -36,4 +37,31 @@ export class KubotService extends BaseApiService {
     return true;
   }
 
+  async getFactions(id: string): Promise<Array<WatchedFaction>> {
+    let result = await this.http.post<any>(`${this.host}/api/kubot/factions`, {
+      id: id
+    }).toPromise();
+
+    if (result.status !== 200) {
+      throw new Error(result.status);
+    }
+
+    return result.data as Array<WatchedFaction>;
+  }
+
+  async saveFactions(
+    id: string,
+    factions: Array<WatchedFaction>
+  ): Promise<boolean> {
+    let result = await this.http.post<any>(`${this.host}/api/kubot/savefactions`, {
+      id: id,
+      factions: factions
+    }).toPromise();
+
+    if (result.status !== 200) {
+      throw new Error(result.status);
+    }
+
+    return true;
+  }
 }

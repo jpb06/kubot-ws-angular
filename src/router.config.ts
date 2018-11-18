@@ -3,9 +3,9 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "./app/home/home.component";
 import { LoginComponent } from "./app/login/login.component";
 import { AboutComponent } from "./app/about/about.component";
-import { GuildHomeComponent } from "./app/guild-home/guild-home.component";
-import { GuildFactionsComponent } from "./app/guild-factions/guild-factions.component";
-import { GuildRegionsComponent } from "./app/guild-regions/guild-regions.component";
+import { GuildHomeComponent } from "./app/guild-home/guild.home.component";
+import { GuildFactionsComponent } from "./app/guild-factions/guild.factions.component";
+import { GuildRegionsComponent } from "./app/guild-regions/guild.regions.component";
 
 import { AuthGuard } from "./logic/auth.guard";
 
