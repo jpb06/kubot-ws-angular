@@ -9,8 +9,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-guild-home',
-  templateUrl: './guild-home.component.html',
-  styleUrls: ['./guild-home.component.scss', './../../assets/styles/colors.scss']
+  templateUrl: './guild.home.component.html',
+  styleUrls: ['./guild.home.component.scss', './../../assets/styles/colors.scss', './../../assets/styles/form.validation.scss']
 })
 export class GuildHomeComponent implements OnInit {
 
