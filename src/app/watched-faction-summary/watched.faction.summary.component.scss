@@ -1,0 +1,21 @@
+.table td, .table th {
+  text-align: center;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.09);
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #28a745;
+  color: #303030;
+}
+
+.table-row-selected {
+  background-color: #28a745 !important;
+  color: #303030 !important;
+}
