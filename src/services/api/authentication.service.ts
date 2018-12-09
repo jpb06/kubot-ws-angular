@@ -30,6 +30,7 @@ export class AuthenticationService extends BaseApiService {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('guild_id', guildId);
       localStorage.setItem('id_token', req.token);
+      localStorage.setItem('roles', JSON.stringify(req.roles));
       localStorage.setItem('expiration_date', JSON.parse(req.expirationDate));
     }
 
@@ -40,6 +41,7 @@ export class AuthenticationService extends BaseApiService {
     // remove user from local storage to log user out
     localStorage.removeItem('guild_id');
     localStorage.removeItem('id_token');
+    localStorage.removeItem('roles');
     localStorage.removeItem('expiration_date');
   }
 
@@ -54,5 +56,11 @@ export class AuthenticationService extends BaseApiService {
 
   getGuildId() {
     return localStorage.getItem('guild_id');
+  }
+
+  hasRole(role: string) {
+    let roles: Array<string> = JSON.parse(localStorage.getItem('roles'));
+
+    return (roles.indexOf(role) !== -1);
   }
 }
