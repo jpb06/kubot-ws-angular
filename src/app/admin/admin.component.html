@@ -1,0 +1,12 @@
+<form [formGroup]="starSystemsForm" (ngSubmit)="setStarSystems()">
+  <div class="card text-white bg-darkblue mb-3">
+    <div class="card-header bg-greyblue">Star systems</div>
+    <div class="card-body">
+      <textarea class="form-control" formControlName="starSystems" id="starSystems" rows="10" [ngClass]="{'invalid-input': !this.starSystemsForm.get('starSystems').valid}"></textarea>
+
+    </div>
+    <div class="card-footer bg-greyblue">
+      <button type="submit" class="btn btn-primary" [disabled]="starSystemsForm.invalid">Submit</button>
+    </div>
+  </div>
+</form>
