@@ -10,7 +10,11 @@ import { WatchedFactionSummaryComponent } from '../watched-faction-summary/watch
 @Component({
   selector: 'app-guild-factions',
   templateUrl: './guild.factions.component.html',
-  styleUrls: ['./guild.factions.component.scss', './../../assets/styles/colors.scss', './../../assets/styles/form.validation.scss']
+  styleUrls: [
+    './../../assets/styles/colors.scss',
+    './../../assets/styles/form.validation.scss',
+    './../../assets/styles/watched.items.common.scss'
+  ]
 })
 export class GuildFactionsComponent implements OnInit {
   @ViewChild(WatchedFactionSummaryComponent) factionsSummaryChild: WatchedFactionSummaryComponent;
@@ -42,7 +46,7 @@ export class GuildFactionsComponent implements OnInit {
   async ngOnInit() {
     try {
       this.factionForm.setValue({
-        'factionName': '',
+        factionName: '',
         watchedTags: [],
         tag: '',
         alwaysDisplay: false

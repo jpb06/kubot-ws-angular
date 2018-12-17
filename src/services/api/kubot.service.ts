@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { GuildConfiguration } from './../../types/api/guild';
 import { BaseApiService } from './base/base.api.service';
 import { WatchedFaction } from '../../types/api/watched.faction';
+import { WatchedRegion } from 'src/types/api/watched.region';
 
 @Injectable()
 export class KubotService extends BaseApiService {
@@ -56,6 +57,34 @@ export class KubotService extends BaseApiService {
     let result = await this.http.post<any>(`${this.host}/api/kubot/savefactions`, {
       id: id,
       factions: factions
+    }).toPromise();
+
+    if (result.status !== 200) {
+      throw new Error(result.status);
+    }
+
+    return true;
+  }
+
+  async getRegions(id: string): Promise<Array<WatchedRegion>> {
+    let result = await this.http.post<any>(`${this.host}/api/kubot/regions`, {
+      id: id
+    }).toPromise();
+
+    if (result.status !== 200) {
+      throw new Error(result.status);
+    }
+
+    return result.data as Array<WatchedRegion>;
+  }
+
+  async saveRegions(
+    id: string,
+    regions: Array<WatchedRegion>
+  ): Promise<boolean> {
+    let result = await this.http.post<any>(`${this.host}/api/kubot/saveregions`, {
+      id: id,
+      regions: regions
     }).toPromise();
 
     if (result.status !== 200) {

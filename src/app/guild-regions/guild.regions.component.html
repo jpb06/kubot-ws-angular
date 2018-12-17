@@ -1,3 +1,74 @@
-<p>
-  guild-regions works!
-</p>
+<div class="card text-white bg-darkblue mb-3">
+  <div class="card-header bg-greyblue">Validating changes</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged || this.watchedRegions.length === 0" (click)="saveChanges()">Save regions configuration</button>
+      </div><div class="col">
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to last configuration</button>
+      </div>
+    </div>
+
+    <small class="form-text text-info">Don't forget to save once your're done.</small>
+  </div>
+</div>
+<div class="card text-white bg-darkblue mb-3">
+  <div class="card-header bg-greyblue">Watched regions</div>
+  <div class="card-body">
+    <div *ngIf="this.watchedRegions.length === 0" class="no-item-defined">No regions defined</div>
+    <div *ngIf="this.watchedRegions.length > 0">
+      <app-watched-regions-summary [watchedRegions]="watchedRegions"
+                                   (modified)="watchedRegionModified($event)" (removed)="watchedRegionRemoved($event)">
+      </app-watched-regions-summary>
+    </div>
+  </div>
+</div>
+<form [formGroup]="regionForm" (ngSubmit)="setRegion()">
+  <div class="card text-white bg-darkblue mb-3">
+    <div class="card-header bg-greyblue">{{regionFormTitle}}</div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="regionName">Region name</label>
+        <input type="text" class="form-control" id="regionName" aria-describedby="regionNameHelp" placeholder="Enter any name, really"
+               formControlName="regionName" [ngClass]="{'invalid-input': !this.regionForm.get('regionName').valid}" />
+        <small id="regionNameHelp" class="form-text text-info">This name will be displayed when a player using one of the tag(s) defined for the region is detected.</small>
+      </div>
+      <div class="form-group">
+        <label for="regionSystems">Systems</label>
+        <div class="items-list">
+          <div class="row">
+            <div *ngIf="this.regionForm.get('watchedSystems').value.length === 0" class="no-item-defined">No watched systems defined for this region</div>
+            <app-watch-item *ngFor="let system of this.regionForm.get('watchedSystems').value"
+                            [watchItem]="system"
+                            (deleted)="watchItemDeleted($event)">
+            </app-watch-item>
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-info" type="button" (click)="addSystem()">Add</button>
+          </div>
+
+          <input type="text" class="form-control" id="system" placeholder="Enter a system name" aria-label="System to watch" aria-describedby="systemHelp" formControlName="system" />
+
+        </div>
+        <small id="systemHelp" class="form-text text-info">This system will be added to the watch list of this faction.</small>
+      </div>
+      <div class="form-group">
+        <label>Display mode</label><br />
+        <label class="switch">
+          <input type="checkbox" formControlName="alwaysDisplay">
+          <span class="slider round"></span>
+
+        </label>
+        <div *ngIf="this.regionForm.get('alwaysDisplay').value">Always displayed</div>
+        <div *ngIf="!this.regionForm.get('alwaysDisplay').value">Only when active</div>
+        <small id="displayModeHelp" class="form-text text-info">If you choose first option, the system will show up in the scan report even if there is no member online.</small>
+      </div>
+    </div>
+    <div class="card-footer bg-greyblue">
+      <button type="submit" class="btn btn-primary" [disabled]="regionForm.invalid">{{formButtonText}}</button>&nbsp;
+      <button type="submit" class="btn btn-primary" (click)="cancelModify()" *ngIf="this.regionsSummaryChild !== undefined && this.regionsSummaryChild.selectedIndex !== -1">Cancel</button>
+    </div>
+  </div>
+</form>

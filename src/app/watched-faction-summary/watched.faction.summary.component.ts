@@ -4,7 +4,7 @@ import { WatchedFaction } from '../../types/api/watched.faction';
 @Component({
   selector: 'app-watched-faction-summary',
   templateUrl: './watched.faction.summary.component.html',
-  styleUrls: ['./watched.faction.summary.component.scss']
+  styleUrls: ['./../../assets/styles/watched.items.summary.common.scss']
 })
 export class WatchedFactionSummaryComponent implements OnInit {
 

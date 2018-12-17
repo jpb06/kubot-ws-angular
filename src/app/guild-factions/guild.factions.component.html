@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col">
-        <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged" (click)="saveChanges()">Save factions configuration</button>
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged || this.watchedFactions.length === 0" (click)="saveChanges()">Save factions configuration</button>
       </div><div class="col">
   <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to initial configuration</button>
 </div>
@@ -15,11 +15,14 @@
 <div class="card text-white bg-darkblue mb-3">
   <div class="card-header bg-greyblue">Watched factions</div>
   <div class="card-body">
-    <app-watched-faction-summary [watchedFactions]="watchedFactions"
-                                 (modified)="watchedFactionModified($event)" (removed)="watchedFactionRemoved($event)">
-    </app-watched-faction-summary>
+    <div *ngIf="this.watchedFactions.length === 0" class="no-item-defined">No factions defined</div>
+    <div *ngIf="this.watchedFactions.length > 0">
+      <app-watched-faction-summary [watchedFactions]="watchedFactions"
+                                   (modified)="watchedFactionModified($event)" (removed)="watchedFactionRemoved($event)">
+      </app-watched-faction-summary>
+    </div>
+    </div>
   </div>
-</div>
 <form [formGroup]="factionForm" (ngSubmit)="setFaction()">
   <div class="card text-white bg-darkblue mb-3">
     <div class="card-header bg-greyblue">{{factionFormTitle}}</div>
@@ -32,9 +35,9 @@
       </div>
       <div class="form-group">
         <label for="factionTags">Tags</label>
-        <div class="tags-list">
+        <div class="items-list">
           <div class="row">
-            <div *ngIf="this.factionForm.get('watchedTags').value.length === 0" class="no-tags-defined">No watched tags defined for this faction</div>
+            <div *ngIf="this.factionForm.get('watchedTags').value.length === 0" class="no-item-defined">No watched tags defined for this faction</div>
             <app-watch-item *ngFor="let tag of this.factionForm.get('watchedTags').value"
                             [watchItem]="tag"
                             (deleted)="watchItemDeleted($event)">
@@ -64,7 +67,7 @@
     </div>
     <div class="card-footer bg-greyblue">
       <button type="submit" class="btn btn-primary" [disabled]="factionForm.invalid">{{formButtonText}}</button>&nbsp;
-      <button type="submit" class="btn btn-primary" (click)="cancelModify()" *ngIf="this.factionsSummaryChild.selectedIndex !== -1">Cancel</button>
+      <button type="submit" class="btn btn-primary" (click)="cancelModify()" *ngIf="this.factionsSummaryChild !== undefined && this.factionsSummaryChild.selectedIndex !== -1">Cancel</button>
     </div>
   </div>
 </form>
