@@ -1,0 +1,32 @@
+<table class="table table-sm table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col" width="200">Actions</th>
+      <th scope="col">Name</th>
+      <th scope="col">Watched systems</th>
+      <th scope="col">Display mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let region of this.watchedRegions; let index = index" [ngClass]="{'table-row-selected':index === this.selectedIndex}">
+      <td>
+        <button type="submit" class="btn btn-outline-secondary" (click)="modify(region, index)">Modify</button>&nbsp;
+        <button type="submit" class="btn btn-outline-danger" (click)="remove(region, index)">Remove</button>
+      </td>
+      <td><strong>{{region.name}}</strong></td>
+      <td>
+        <div class="row">
+          <app-watched-summary-item *ngFor="let system of region.systems"
+                                    [value]="system">
+
+          </app-watched-summary-item>
+        </div>
+      </td>
+      <td>
+        <div *ngIf="region.alwaysDisplay">
+          Always displayed
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

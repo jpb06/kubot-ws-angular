@@ -1,0 +1,19 @@
+.summary-item {
+  height: 30px;
+  border-radius: 30px;
+  min-width: 50px;
+  display: flex;
+  margin: 4px;
+  user-select: none;
+  border: 1px solid #167c2d;
+}
+
+.summary-item:hover {
+  border: 1px solid #0a601d;
+}
+
+.summary-item .summary-item-value {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}

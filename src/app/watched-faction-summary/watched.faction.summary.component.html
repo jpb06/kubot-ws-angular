@@ -13,9 +13,14 @@
         <button type="submit" class="btn btn-outline-secondary" (click)="modify(faction, index)">Modify</button>&nbsp;
         <button type="submit" class="btn btn-outline-danger" (click)="remove(faction, index)">Remove</button>
       </td>
-      <td>{{faction.name}}</td>
+      <td><strong>{{faction.name}}</strong></td>
       <td>
-        <div *ngFor="let tag of faction.tags">{{tag}}</div>
+        <div class="row">
+          <app-watched-summary-item *ngFor="let tag of faction.tags"
+                                    [value]="tag">
+
+          </app-watched-summary-item>
+        </div>
       </td>
       <td>
         <div *ngIf="faction.alwaysDisplay">

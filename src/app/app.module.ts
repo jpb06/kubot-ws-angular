@@ -34,6 +34,9 @@ import { GuildRegionsComponent } from './guild-regions/guild.regions.component';
 import { WatchItemComponent } from './watch-item/watch.item.component';
 import { WatchedFactionSummaryComponent } from './watched-faction-summary/watched.faction.summary.component';
 import { AdminComponent } from './admin/admin.component';
+import { WatchedRegionsSummaryComponent } from './watched-regions-summary/watched-regions-summary.component';
+import { AutocompleteMatchComponent } from './autocomplete-match/autocomplete-match.component';
+import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summary-item.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { AdminComponent } from './admin/admin.component';
     GuildRegionsComponent,
     WatchItemComponent,
     WatchedFactionSummaryComponent,
-    AdminComponent
+    AdminComponent,
+    WatchedRegionsSummaryComponent,
+    AutocompleteMatchComponent,
+    WatchedSummaryItemComponent
   ],
   imports: [
     BrowserModule,
