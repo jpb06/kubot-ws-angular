@@ -3,9 +3,12 @@ import { WatchedRegionsSummaryComponent } from '../watched-regions-summary/watch
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { WatchedRegion } from 'src/types/api/watched.region';
 import { KubotService } from 'src/services/api/kubot.service';
+import { StaticDataService } from 'src/services/api/static.service';
 import { AlertService, AlertType } from 'src/services/alert.service';
 import { AuthenticationService } from 'src/services/api/authentication.service';
 import { WatchItem } from 'src/types/models/watch.item.model';
+
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-guild-regions',
@@ -24,13 +27,15 @@ export class GuildRegionsComponent implements OnInit {
   private formButtonAddText: string = 'Add';
   private formButtonModifyText: string = 'Modify';
 
-  results: any[] = [];
-  queryField: FormControl = new FormControl();
+  private starSystems: Array<string> = [];
+  private alreadyAddedStarSystems: Array<string> = [];
+
+  starSystemsMatches: Array<string> = [];
 
   public regionForm = this.formBuilder.group({
     regionName: [null, Validators.required],
     watchedSystems: [null, Validators.required],
-    system: [null],
+    systemSearch: [null],
     alwaysDisplay: [null]
   });
   public watchedRegions: Array<WatchedRegion> = [];
@@ -43,6 +48,7 @@ export class GuildRegionsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private kubotService: KubotService,
+    private staticDataService: StaticDataService,
     private alertService: AlertService
   ) { }
 
@@ -51,24 +57,43 @@ export class GuildRegionsComponent implements OnInit {
       this.regionForm.setValue({
         regionName: '',
         watchedSystems: [],
-        system: '',
+        systemSearch: '',
         alwaysDisplay: false
       });
 
+      let allStarSystems = await this.staticDataService.getStarSystems();
+      this.starSystems = allStarSystems.map(el => el.name).filter((el, index, self) => self.indexOf(el) === index);
+
       this.watchedRegions = await this.kubotService.getRegions(this.authenticationService.getGuildId());
       this.initialConfiguration = JSON.stringify(this.watchedRegions.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)));
+
+      this.initializeAlreadyAddedSystems();
+
+      this.regionForm.get('systemSearch').valueChanges
+        .pipe(debounceTime(500))
+        .subscribe(term => {
+          if (term.length === 0) {
+            this.starSystemsMatches = [];
+          }
+          else {
+            this.starSystemsMatches = this.starSystems.filter(el =>
+              el.toLowerCase().includes(term.toLowerCase()) && !this.alreadyAddedStarSystems.includes(el));
+          }
+        });
+
     } catch (error) {
+      console.log(error);
       this.alertService.report('An error occured while retrieving watched regions for your guild.', AlertType.Exception);
     }
   }
 
-  addSystem() {
-    let system = this.regionForm.get('system').value;
-    let watchedSystems: Array<WatchItem> = this.regionForm.get('watchedSystems').value;
-    if (system !== '' && !watchedSystems.find(el => el.value === system)) {
-      watchedSystems.push({ type: 'system', value: system });
-      this.regionForm.get('system').reset();
-      this.regionForm.get('watchedSystems').reset(watchedSystems);
+  initializeAlreadyAddedSystems() {
+    this.alreadyAddedStarSystems = [];
+
+    for (let i = 0; i < this.watchedRegions.length; i++) {
+      let region = this.watchedRegions[i];
+
+      this.alreadyAddedStarSystems.push(...region.systems);
     }
   }
 
@@ -76,6 +101,21 @@ export class GuildRegionsComponent implements OnInit {
     let watchedSystems: Array<WatchItem> = this.regionForm.get('watchedSystems').value;
     watchedSystems = watchedSystems.filter(el => el.value !== watchedSystem.value);
     this.regionForm.get('watchedSystems').reset(watchedSystems);
+
+    if (this.regionForm.get('systemSearch').value.length > 0 &&
+        watchedSystem.value.toLowerCase().includes(this.regionForm.get('systemSearch').value.toLowerCase())) {
+      this.starSystemsMatches.push(watchedSystem.value);
+    }
+    this.alreadyAddedStarSystems = this.alreadyAddedStarSystems.filter(el => el !== watchedSystem.value);
+  }
+
+  systemSearchResultSelected(system: string) {
+    let watchedSystems: Array<WatchItem> = this.regionForm.get('watchedSystems').value;
+    watchedSystems.push({ type: 'system', value: system });
+    this.regionForm.get('watchedSystems').reset(watchedSystems);
+
+    this.starSystemsMatches = this.starSystemsMatches.filter(el => el !== system);
+    this.alreadyAddedStarSystems.push(system);
   }
 
   watchedRegionModified(region: WatchedRegion) {
@@ -84,7 +124,7 @@ export class GuildRegionsComponent implements OnInit {
     this.formButtonText = this.formButtonModifyText;
 
     this.regionForm.get('regionName').reset(region.name);
-    this.regionForm.get('system').reset();
+    this.regionForm.get('systemSearch').reset('');
     this.regionForm.get('watchedSystems').reset(region.systems.map(el => {
       return {
         type: 'System',
@@ -98,6 +138,8 @@ export class GuildRegionsComponent implements OnInit {
   watchedRegionRemoved(region: WatchedRegion) {
     this.watchedRegions = this.watchedRegions.filter(el => el.name !== region.name);
     this.configurationChanged = this.verifyIfConfigurationChanged();
+
+    this.initializeAlreadyAddedSystems();
   }
 
   setRegion() {
@@ -131,7 +173,7 @@ export class GuildRegionsComponent implements OnInit {
   private resetForm() {
     this.regionsSummaryChild.selectedIndex = -1;
     this.regionForm.get('regionName').reset();
-    this.regionForm.get('system').reset();
+    this.regionForm.get('systemSearch').reset('');
     this.regionForm.get('watchedSystems').reset([]);
     this.regionForm.get('alwaysDisplay').reset(false);
     this.regionFormTitle = this.addFormTitle;
