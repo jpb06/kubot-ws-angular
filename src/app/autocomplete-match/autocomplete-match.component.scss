@@ -1,0 +1,36 @@
+.result {
+  height: 30px;
+  background-color: gray;
+  border-radius: 30px;
+  min-width: 50px;
+  display: flex;
+  margin: 4px;
+  user-select: none;
+}
+
+.result:hover {
+  background-color: darkgrey;
+}
+
+.result .result-value {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.result .result-select {
+  border-radius: 30px;
+  background-color: #17a2b8;
+  width: 75px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.result .result-select:hover {
+  background-color: #28a745;
+}
+
+.result-select i {
+  margin-right:5px;
+}
