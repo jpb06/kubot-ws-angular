@@ -13,9 +13,14 @@
         <button type="submit" class="btn btn-outline-secondary" (click)="modify(region, index)">Modify</button>&nbsp;
         <button type="submit" class="btn btn-outline-danger" (click)="remove(region, index)">Remove</button>
       </td>
-      <td>{{region.name}}</td>
+      <td><strong>{{region.name}}</strong></td>
       <td>
-        <div *ngFor="let system of region.systems">{{system}}</div>
+        <div class="row">
+          <app-watched-summary-item *ngFor="let system of region.systems"
+                                    [value]="system">
+
+          </app-watched-summary-item>
+        </div>
       </td>
       <td>
         <div *ngIf="region.alwaysDisplay">
