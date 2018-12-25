@@ -27,7 +27,7 @@ export class StaticDataService extends BaseApiService {
         throw new Error(result.status);
       }
 
-      this.starSystems = result as Array<StarSystem>;
+      this.starSystems = result.data as Array<StarSystem>;
       this.starSystemsLastCall = moment();
     }
 
