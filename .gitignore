@@ -337,3 +337,4 @@ ASALocalRun/
 
 #perso
 dist/
+/build-logic/private/private.config.js
