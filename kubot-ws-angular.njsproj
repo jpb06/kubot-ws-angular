@@ -16,11 +16,17 @@
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <LastActiveSolutionConfig>Release|Any CPU</LastActiveSolutionConfig>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <PostBuildEvent>ng serve</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
@@ -118,8 +124,11 @@
     <TypeScriptCompile Include="src\types\models\watch.item.model.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="build-logic\private\" />
     <Folder Include="e2e" />
     <Folder Include="e2e\src" />
+    <Folder Include="build-logic\" />
+    <Folder Include="release\" />
     <Folder Include="src" />
     <Folder Include="src\app" />
     <Folder Include="src\app\about" />
@@ -153,6 +162,16 @@
     <Folder Include="src\types\models" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="build-logic\deploy.commands.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="build-logic\private\private.config.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="build-logic\zip.util.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gulpfile.js" />
     <Compile Include="src\karma.conf.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
