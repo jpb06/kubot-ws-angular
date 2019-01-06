@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const rimraf = require('rimraf');
 
 const deployCommands = require('./build-logic/deploy.commands.js');
+const fsUtil = require('./build-logic/fs.util.js');
 
 gulp.task('clean', () => {
   rimraf('./dist', (err) => {
@@ -12,9 +13,13 @@ gulp.task('clean', () => {
 
 gulp.task('deploy', async () => {
 
-  await deployCommands.buildForProd();
+  //await deployCommands.buildForProd();
 
-  await deployCommands.zipDist();
+  await fsUtil.cleanDeploy();
+
+  await fsUtil.copyFilesForDeploy();
+
+  await deployCommands.zipDeploy();
 
   await deployCommands.sendFileToDeployServer();
 
