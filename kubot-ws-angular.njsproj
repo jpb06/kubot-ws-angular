@@ -35,6 +35,12 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="angular.json" />
+    <Content Include="build-logic\console.util.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="build-logic\private\start.sh">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="src\app\app.component.scss" />
@@ -163,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="build-logic\deploy.commands.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="build-logic\fs.util.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="build-logic\private\private.config.js">

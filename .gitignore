@@ -340,3 +340,4 @@ dist/
 /build-logic/private/private.config.js
 /pscp.exe
 /deploy
+/build-logic/private/start.sh

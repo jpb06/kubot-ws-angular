@@ -12,6 +12,7 @@ main.copyFilesForDeploy = async function () {
   await fs.copy('./angular.json', './deploy/angular.json');
   await fs.copy('./package.json', './deploy/package.json');
   await fs.copy('./README.md', './deploy/README.md');
+  await fs.copy('./build-logic/private/start.sh', './deploy/start.sh');
 
   console.log('Done.');
 };
