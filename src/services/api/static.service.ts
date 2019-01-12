@@ -22,7 +22,7 @@ export class StaticDataService extends BaseApiService {
 
     if (this.starSystemsLastCall.add(3, 'm').isBefore(moment())) {
 
-      let result = await this.http.post<any>(`${this.host}/api/static/systems`, {}).toPromise();
+      let result = await this.http.post<any>(`${this.host}/static/systems`, {}).toPromise();
       if (result.status !== 200) {
         throw new Error(result.status);
       }

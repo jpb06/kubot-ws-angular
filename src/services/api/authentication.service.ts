@@ -18,7 +18,7 @@ export class AuthenticationService extends BaseApiService {
   ): Promise<any> {
 
     let req = await this.http.post<any>(
-      `${this.host}/api/ws/login`,
+      `${this.host}/ws/login`,
       {
         login: guildId,
         password: password,

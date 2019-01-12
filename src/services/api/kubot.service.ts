@@ -15,7 +15,7 @@ export class KubotService extends BaseApiService {
   }
 
   async getGuild(id: string): Promise<GuildConfiguration> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/guild`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/guild`, {
       id: id
     }).toPromise();
 
@@ -27,7 +27,7 @@ export class KubotService extends BaseApiService {
   }
 
   async saveGuildSettings(guild: GuildConfiguration): Promise<boolean> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/saveguild`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/saveguild`, {
       guild: guild
     }).toPromise();
 
@@ -39,7 +39,7 @@ export class KubotService extends BaseApiService {
   }
 
   async getFactions(id: string): Promise<Array<WatchedFaction>> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/factions`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/factions`, {
       id: id
     }).toPromise();
 
@@ -54,7 +54,7 @@ export class KubotService extends BaseApiService {
     id: string,
     factions: Array<WatchedFaction>
   ): Promise<boolean> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/savefactions`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/savefactions`, {
       id: id,
       factions: factions
     }).toPromise();
@@ -67,7 +67,7 @@ export class KubotService extends BaseApiService {
   }
 
   async getRegions(id: string): Promise<Array<WatchedRegion>> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/regions`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/regions`, {
       id: id
     }).toPromise();
 
@@ -82,7 +82,7 @@ export class KubotService extends BaseApiService {
     id: string,
     regions: Array<WatchedRegion>
   ): Promise<boolean> {
-    let result = await this.http.post<any>(`${this.host}/api/kubot/saveregions`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/saveregions`, {
       id: id,
       regions: regions
     }).toPromise();

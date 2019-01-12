@@ -1,7 +1,14 @@
+import { environment } from './../../../environments/environment';
+
 export class BaseApiService {
   protected host: string;
 
   constructor() {
-    this.host = 'http://localhost:1337';
+    if (environment.production) {
+      this.host = 'https://kubot.cf/api';
+    } else {
+      this.host = 'http://localhost/api';
+    }
+   
   }
 }

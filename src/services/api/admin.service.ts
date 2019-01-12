@@ -14,7 +14,7 @@ export class AdminService extends BaseApiService {
 
   async setStarSystems(starSystems: Array<StarSystem>): Promise<void> {
 
-    let result = await this.http.post<any>(`${this.host}/api/kubot/admin/setstarsystems`, {
+    let result = await this.http.post<any>(`${this.host}/kubot/admin/setstarsystems`, {
       starsystems: starSystems
     }).toPromise();
 
