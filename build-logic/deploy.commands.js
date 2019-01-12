@@ -23,6 +23,16 @@ main.buildForProd = async function () {
 
 };
 
+main.zipDist = async function () {
+
+  consoleUtil.printHeader('Zipping dist ...');
+
+  await zipUtil.zipDirectory('./dist/kubot-ws-angular', `./release/kubotwsangular_${pckg.version}.zip`);
+
+  console.log(`Archive kubotwsangular_${pckg.version}.zip created in release folder`);
+
+};
+
 main.zipDeploy = async function () {
 
   consoleUtil.printHeader('Zipping deploy ...');
@@ -37,7 +47,7 @@ main.sendFileToDeployServer = async function () {
 
   consoleUtil.printHeader('Sending file to deploy server ...');
 
-  const { stdout, stderr } = await exec(`.\\pscp.exe -P ${settings.port} -l ${settings.user} -i ${settings.priPath} ./release/kubotwsangular_${pckg.version}.zip ${settings.user}@${settings.srvAddress}:${settings.destPath}`);
+  const { stdout, stderr } = await exec(`.\\pscp.exe -P ${settings.port} -l ${settings.user} -i ${settings.priPath} ./release/kubotwsangular_${pckg.version}.zip ${settings.user}@${settings.srvLocalAddress}:${settings.destPath}`);
 
   console.log('stdout:', stdout);
   console.log('stderr:', stderr);
@@ -52,7 +62,7 @@ main.deploy = function () {
   let gulpSSH = new GulpSSH({
     ignoreErrors: false,
     sshConfig: {
-      host: settings.srvAddress,
+      host: settings.srvLocalAddress,
       port: settings.port,
       username: settings.user,
       privateKey: fs.readFileSync(settings.priPath)

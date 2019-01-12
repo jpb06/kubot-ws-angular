@@ -25,4 +25,13 @@ main.cleanDeploy = async function () {
   console.log('Done.');
 };
 
+main.cleanDist = async function () {
+  consoleUtil.printHeader('Cleaning dist folder ...');
+
+  await fs.emptyDir('./dist');
+
+  console.log('Done.');
+};
+
+
 module.exports = main;

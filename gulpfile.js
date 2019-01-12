@@ -12,14 +12,12 @@ gulp.task('clean', () => {
 });
 
 gulp.task('deploy', async () => {
+  
+  await fsUtil.cleanDist();
 
-  //await deployCommands.buildForProd();
+  await deployCommands.buildForProd();
 
-  await fsUtil.cleanDeploy();
-
-  await fsUtil.copyFilesForDeploy();
-
-  await deployCommands.zipDeploy();
+  await deployCommands.zipDist();
 
   await deployCommands.sendFileToDeployServer();
 
