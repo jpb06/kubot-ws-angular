@@ -1,8 +1,6 @@
-const gulp = require('gulp');
 const fs = require('fs');
 const GulpSSH = require('gulp-ssh');
 const util = require('util');
-var log = require('fancy-log');
 
 const zipUtil = require('./zip.util.js');
 const consoleUtil = require('./console.util.js');
