@@ -1,24 +1,31 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top custom-nav-bar">
-  <i class="fa fa-cog fa-2x is-link" routerLink="home"></i>
-  <h5 class="ml-auto is-link" routerLink="home">kubot guild configuration</h5>
-  <form class="form-inline ml-3">
-    <button *ngIf="!isLoggedIn()" class="btn btn-outline-success" type="button" [routerLink]="['login']">Login</button>
-    <button *ngIf="isLoggedIn()" class="btn btn-outline-success" type="button" (click)="logout()">Logout</button>
-  </form>
-  <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#collapsedContent" aria-controls="collapsedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse collapse" id="collapsedContent">
-    <app-menu-guest class="ml-auto" *ngIf="!isLoggedIn()"></app-menu-guest>
-    <app-menu-user class="ml-auto" *ngIf="isLoggedIn()"></app-menu-user>
-  </div>
-</nav>
-<main class="container-fluid">
-  <alert></alert>
-  <router-outlet></router-outlet>
-</main>
-<div class="navbar navbar-fixed-bottom footer">
-  <div class="container-fluid">
-    <span class="text-white">kubot guild configuration utility.</span>
+<div id="app" class="h-100">
+  <div id="content" class="d-flex flex-column h-100">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top custom-nav-bar">
+
+      <img class="is-link" routerLink="home" src="data:image/png;base64,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" />
+      <form class="form-inline ml-3">
+        <button *ngIf="!isLoggedIn()" class="btn btn-outline-success" type="button" [routerLink]="['login']">Login</button>
+        <button *ngIf="isLoggedIn()" class="btn btn-outline-success" type="button" (click)="logout()">Logout</button>
+      </form>
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#collapsedContent" aria-controls="collapsedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="collapsedContent">
+        <div class="menu-spacer"></div>
+        <app-menu-guest class="ml-auto" *ngIf="!isLoggedIn()"></app-menu-guest>
+        <app-menu-user class="ml-auto" *ngIf="isLoggedIn()"></app-menu-user>
+        <div class="menu-spacer"></div>
+
+      </div>
+    </nav>
+    <main class="container-fluid flex-grow-1">
+      <alert></alert>
+      <router-outlet></router-outlet>
+    </main>
+    <div class="footer">
+      <div class="text-center text-footer">kubot guild configuration utility</div>
+    </div>
+
   </div>
 </div>
