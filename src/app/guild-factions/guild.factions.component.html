@@ -5,12 +5,12 @@
       <div class="col">
         <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged || this.watchedFactions.length === 0" (click)="saveChanges()">Save factions configuration</button>
       </div><div class="col">
-  <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to initial configuration</button>
-</div>
+        <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to initial configuration</button>
+      </div>
     </div>
 
-      <small class="form-text text-info">Don't forget to save once your're done.</small>
-    </div>
+    <small class="form-text text-info">Don't forget to save once your're done.</small>
+  </div>
 </div>
 <div class="card text-white bg-darkblue mb-3">
   <div class="card-header bg-greyblue">Watched factions</div>
@@ -21,8 +21,8 @@
                                    (modified)="watchedFactionModified($event)" (removed)="watchedFactionRemoved($event)">
       </app-watched-faction-summary>
     </div>
-    </div>
   </div>
+</div>
 <form [formGroup]="factionForm" (ngSubmit)="setFaction()">
   <div class="card text-white bg-darkblue mb-3">
     <div class="card-header bg-greyblue">{{factionFormTitle}}</div>
