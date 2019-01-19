@@ -12,7 +12,9 @@
       <small id="passwordHelp" class="form-text text-info">The password was given to you in your discord guild admin channel.</small>
     </div>
   </div>
+  <app-loading-bar [color]="'white'" [fixed]="false" [height]="10"></app-loading-bar>
   <div class="card-footer bg-greyblue">
-    <button type="button" class="btn btn-primary" (click)="login();">Submit</button>
+    
+    <button type="button" class="btn btn-primary float-right" (click)="login();">Login</button>
   </div>
 </div>
