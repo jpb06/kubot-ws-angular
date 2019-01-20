@@ -1,12 +1,26 @@
 <div class="card text-white bg-darkblue mb-3">
   <div class="card-header bg-greyblue">Validating changes</div>
   <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <button type="submit" class="btn btn-outline-success btn-lg btn-block mb-1" [disabled]="!configurationChanged || this.watchedFactions.length === 0" (click)="saveChanges()">Save factions configuration</button>
-      </div><div class="col">
-        <button type="submit" class="btn btn-outline-success btn-lg btn-block" [disabled]="!configurationChanged" (click)="resetConfig()">Reset to initial configuration</button>
-      </div>
+    <div class="draft-validation">
+      <button type="submit"
+              class="btn"
+              [ngClass]="{
+                'btn-success' :(configurationChanged && this.watchedFactions.length !== 0),
+                'btn-outline-success': (!configurationChanged || this.watchedFactions.length === 0)
+              }"
+              [disabled]="!configurationChanged || this.watchedFactions.length === 0"
+              (click)="saveChanges()">Save factions configuration</button>
+
+      <button type="submit"
+              class="btn"
+              [ngClass]="{
+                'btn-success' :configurationChanged,
+                'btn-outline-success': !configurationChanged
+              }"
+              [disabled]="!configurationChanged"
+              (click)="resetConfig()">
+        Reset to initial configuration
+      </button>
     </div>
 
     <small class="form-text text-info">Don't forget to save once your're done.</small>

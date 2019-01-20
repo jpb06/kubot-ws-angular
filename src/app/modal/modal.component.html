@@ -1,0 +1,20 @@
+<div id="watchedElementModal" class="modal" tabindex="-1" role="dialog" style="color:black;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Heavy decision</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>What do you wish to do?</p>
+        <small>Note that any change made won't be affecting your guild until you save the draft. You can reset the draft to the last saved configuration at any time.</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success modal-choice" (click)="modify()" data-dismiss="modal">Edit</button>
+        <button type="button" class="btn btn-secondary modal-choice" (click)="remove()" data-dismiss="modal">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,24 +11,30 @@ export class WatchedFactionSummaryComponent implements OnInit {
   @Input() watchedFactions: Array<WatchedFaction>;
   @Output() modified = new EventEmitter<WatchedFaction>();
   @Output() removed = new EventEmitter<WatchedFaction>();
+
   selectedIndex: number = -1;
+  selectedElement: any = undefined;
 
   constructor() { }
   ngOnInit() { }
 
-  modify(
+  select(
     faction: WatchedFaction,
     index: number
   ): void {
-    this.selectedIndex = index;
-    this.modified.emit(faction);
+    this.selectedElement = {
+      element: faction,
+      index: index
+    };
   }
 
-  remove(
-    faction: WatchedFaction,
-    index: number
-  ): void {
+  watchedFactionModificationRequested(data: any) {
+    this.selectedIndex = data.index;
+    this.modified.emit(data.element as WatchedFaction);
+  }
+
+  watchedFactionRemovalRequested(data: any) {
     this.selectedIndex = -1;
-    this.removed.emit(faction);
+    this.removed.emit(data.element as WatchedFaction);
   }
 }

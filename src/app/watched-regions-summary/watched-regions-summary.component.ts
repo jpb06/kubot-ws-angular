@@ -11,24 +11,30 @@ export class WatchedRegionsSummaryComponent implements OnInit {
   @Input() watchedRegions: Array<WatchedRegion>;
   @Output() modified = new EventEmitter<WatchedRegion>();
   @Output() removed = new EventEmitter<WatchedRegion>();
+
   selectedIndex: number = -1;
+  selectedElement: any = undefined;
 
   constructor() { }
   ngOnInit() { }
 
-  modify(
+  select(
     region: WatchedRegion,
     index: number
   ): void {
-    this.selectedIndex = index;
-    this.modified.emit(region);
+    this.selectedElement = {
+      element: region,
+      index: index
+    };
   }
 
-  remove(
-    region: WatchedRegion,
-    index: number
-  ): void {
+  watchedFactionModificationRequested(data: any) {
+    this.selectedIndex = data.index;
+    this.modified.emit(data.element as WatchedRegion);
+  }
+
+  watchedFactionRemovalRequested(data: any) {
     this.selectedIndex = -1;
-    this.removed.emit(region);
+    this.removed.emit(data.element as WatchedRegion);
   }
 }
