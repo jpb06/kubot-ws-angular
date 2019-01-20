@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{04729642-a6c0-478a-8da9-3d9fcb12c185}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -59,11 +59,18 @@
     <Content Include="src\app\loading-bar\loading-bar.component.scss" />
     <Content Include="src\app\login\login.component.scss" />
     <Content Include="src\app\main-menu\main.menu.component.scss" />
+    <Content Include="src\app\modal\modal.component.html" />
+    <Content Include="src\app\modal\modal.component.scss" />
     <Content Include="src\app\testanim\testanim.component.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\app\watch-item\watch.item.component.scss" />
     <Content Include="src\app\watched-summary-item\watched-summary-item.component.scss" />
+    <Content Include="src\assets\styles\colors.scss" />
+    <Content Include="src\assets\styles\form.validation.scss" />
+    <Content Include="src\assets\styles\watched.items.common.scss" />
+    <Content Include="src\assets\styles\watched.items.summary.common.scss" />
+    <Content Include="src\browserslist" />
     <Content Include="src\styles.scss" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
@@ -76,6 +83,8 @@
     <Content Include="src\tslint.json" />
     <TypeScriptCompile Include="src\app\loading-bar\loading-bar.component.spec.ts" />
     <TypeScriptCompile Include="src\app\loading-bar\loading-bar.component.ts" />
+    <TypeScriptCompile Include="src\app\modal\modal.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\modal\modal.component.ts" />
     <TypeScriptCompile Include="src\app\testanim\testanim.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -185,6 +194,7 @@
     <Folder Include="src\app\main-menu" />
     <Folder Include="src\app\main-menu\menu-guest" />
     <Folder Include="src\app\main-menu\menu-user" />
+    <Folder Include="src\app\modal\" />
     <Folder Include="src\app\testanim\" />
     <Folder Include="src\app\watched-faction-summary" />
     <Folder Include="src\app\watched-regions-summary" />
