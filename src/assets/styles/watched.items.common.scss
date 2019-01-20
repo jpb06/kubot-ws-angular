@@ -87,3 +87,25 @@ input:checked + .slider:before {
   padding-left: 10px;
   vertical-align: middle;
 }
+
+.draft-validation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.draft-validation button {
+  height: 130px;
+  width: 50%;
+}
+
+.draft-validation button.btn-success {
+  color: #464746 !important;
+}
+
+.draft-validation > :not(:last-child) {
+  margin-right: .25rem;
+}
+
+.draft-validation > :not(:first-child) {
+  margin-left: .25rem;
+}
