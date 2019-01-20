@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   trigger,
   transition,
   state,
   style,
-  useAnimation
+  useAnimation,
+  animate
 } from '@angular/animations';
-import { shake, slideOutUp } from 'ng-animate';
+import { shake, slideOutUp, bounceOutUp } from 'ng-animate';
 
 import { AlertService, AlertType } from './../../services/alert.service';
 
@@ -15,18 +16,10 @@ import { AlertService, AlertType } from './../../services/alert.service';
   selector: 'alert',
   templateUrl: 'alert.component.html',
   styleUrls: ['alert.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('alert', [
-      state('open', style({
-        display: 'block'
-      })),
-      state('closed', style({
-        display: 'none'
-      })),
-
-      transition('closed => open', useAnimation(shake)),
-      transition('open => closed', useAnimation(slideOutUp))
-    ]),
+    trigger('shake', [transition('* => *', useAnimation(shake))]),
+    trigger('hide', [transition('* => *', useAnimation(bounceOutUp))]),
   ],
 })
 
@@ -44,7 +37,8 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.message = alert.message;
         this.type = alert.type;
 
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.animate('shake');
       } else {
         this.message = undefined;
         this.type = undefined;
@@ -54,5 +48,9 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  animate(name: string) {
+    this[name] = !this[name];
   }
 }

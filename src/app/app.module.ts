@@ -14,6 +14,7 @@ import { AlertComponent } from './alert/alert.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './../security/auth.interceptor';
+import { LoadingBarInterceptor } from './../interceptors/loading.bar.interceptor';
 
 import { AdminAuthGuard } from '../security/guards/admin.auth.guard';
 import { GuildAuthGuard } from '../security/guards/guild.auth.guard';
@@ -24,6 +25,7 @@ import { AdminService } from '../services/api/admin.service';
 import { AuthenticationService } from '../services/api/authentication.service';
 import { KubotService } from '../services/api/kubot.service';
 import { StaticDataService } from '../services/api/static.service';
+import { LoadingBarService } from '../services/loading.bar.service';
 
 import { GuildHomeComponent } from './guild-home/guild.home.component';
 import { MenuGuestComponent } from './main-menu/menu-guest/menu.guest.component';
@@ -37,6 +39,9 @@ import { AdminComponent } from './admin/admin.component';
 import { WatchedRegionsSummaryComponent } from './watched-regions-summary/watched-regions-summary.component';
 import { AutocompleteMatchComponent } from './autocomplete-match/autocomplete-match.component';
 import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summary-item.component';
+
+import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,9 @@ import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summ
     AdminComponent,
     WatchedRegionsSummaryComponent,
     AutocompleteMatchComponent,
-    WatchedSummaryItemComponent
+    WatchedSummaryItemComponent,
+    LoadingBarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,7 @@ import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summ
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routerConfig)
+    RouterModule.forRoot(routerConfig),
   ],
   providers: [
     AdminAuthGuard,
@@ -74,7 +81,9 @@ import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summ
     KubotService,
     StaticDataService,
     DateService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    LoadingBarService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingBarInterceptor, multi: true }
   ],
   bootstrap: [
     AppComponent

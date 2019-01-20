@@ -1,32 +1,30 @@
-<table class="table table-sm table-striped table-hover">
+<table class="table table-responsive-sm table-striped table-hover">
   <thead>
     <tr>
-      <th scope="col" width="200">Actions</th>
-      <th scope="col">Name</th>
-      <th scope="col">Watched systems</th>
-      <th scope="col">Display mode</th>
+      <th scope="col" width="100">Actions</th>
+      <th scope="col">Region</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let region of this.watchedRegions; let index = index" [ngClass]="{'table-row-selected':index === this.selectedIndex}">
       <td>
-        <button type="submit" class="btn btn-outline-secondary" (click)="modify(region, index)">Modify</button>&nbsp;
-        <button type="submit" class="btn btn-outline-danger" (click)="remove(region, index)">Remove</button>
+        <i class="fa fa-cog fa-4x" aria-hidden="true" (click)="select(region, index)" data-toggle="modal" data-target="#watchedElementModal"></i>
       </td>
-      <td><strong>{{region.name}}</strong></td>
       <td>
-        <div class="row">
+        <h5>{{region.name}}</h5>
+        <h6 *ngIf="region.alwaysDisplay">
+          Always displayed
+        </h6>
+        <div class="row justify-content-center">
           <app-watched-summary-item *ngFor="let system of region.systems"
                                     [value]="system">
 
           </app-watched-summary-item>
         </div>
       </td>
-      <td>
-        <div *ngIf="region.alwaysDisplay">
-          Always displayed
-        </div>
-      </td>
     </tr>
   </tbody>
 </table>
+<app-modal [watchedElement]="selectedElement"
+           (modificationRequested)="watchedFactionModificationRequested($event)" (removalRequested)="watchedFactionRemovalRequested($event)">
+</app-modal>
