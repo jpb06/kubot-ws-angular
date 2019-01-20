@@ -17,14 +17,13 @@ export class AuthenticationService extends BaseApiService {
     password: string
   ): Promise<any> {
 
-    let req = await this.http.post<any>(
-      `${this.host}/ws/login`,
-      {
-        login: guildId,
-        password: password,
-        expiresIn: 5 * 60
-      }
-    ).toPromise();
+    
+
+    let req = await this.http.post<any>(`${this.host}/ws/login`, {
+      login: guildId,
+      password: password,
+      expiresIn: 20 * 60
+    }).toPromise();
 
     if (req && req.status === 200 && req.token) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
