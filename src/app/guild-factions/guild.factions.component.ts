@@ -90,6 +90,7 @@ export class GuildFactionsComponent implements OnInit {
     }));
 
     this.factionForm.get('alwaysDisplay').reset(faction.alwaysDisplay);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   watchedFactionRemoved(faction: WatchedFaction) {

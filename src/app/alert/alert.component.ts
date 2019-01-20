@@ -37,7 +37,7 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.message = alert.message;
         this.type = alert.type;
 
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         this.animate('shake');
       } else {
         this.message = undefined;

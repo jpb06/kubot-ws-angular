@@ -133,6 +133,7 @@ export class GuildRegionsComponent implements OnInit {
     }));
 
     this.regionForm.get('alwaysDisplay').reset(region.alwaysDisplay);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
   watchedRegionRemoved(region: WatchedRegion) {
@@ -213,5 +214,7 @@ export class GuildRegionsComponent implements OnInit {
     this.alertService.clear();
     this.watchedRegions = await this.kubotService.getRegions(this.authenticationService.getGuildId());
     this.configurationChanged = false;
+
+    this.initializeAlreadyAddedSystems();
   }
 }
