@@ -41,6 +41,7 @@ import { AutocompleteMatchComponent } from './autocomplete-match/autocomplete-ma
 import { WatchedSummaryItemComponent } from './watched-summary-item/watched-summary-item.component';
 
 import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoadingBarComponent } from './loading-bar/loading-bar.component';
     WatchedRegionsSummaryComponent,
     AutocompleteMatchComponent,
     WatchedSummaryItemComponent,
-    LoadingBarComponent
+    LoadingBarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
