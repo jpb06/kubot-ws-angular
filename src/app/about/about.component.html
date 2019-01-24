@@ -1,2 +1,57 @@
-<p>
-</p>
+<div class="jumbotron">
+  <h1 class="display-4">About the kubot project</h1>
+  <p class="lead">Muh nodejs, muh typescript.</p>
+
+  <hr class="my-4">
+  <h4>Project history</h4>
+  <p>This all started with a desire to make a little bot for KNF discord and practice some javascript along the way. Little by little, the project made me study various technologies and it was good fun all along!</p>
+  <h4>A little word about architecture...</h4>
+  <p>The project is split into logical blocks:</p>
+  <ul>
+    <li>The discord bot, written in Typescript and serving as the main app of the project.</li>
+    <li>The Angular 6 website, made to provide an easy tool for configuring the bot.</li>
+    <li>The frontend API, used by the website to do what it does best.</li>
+    <li>The Data Access Layer,  provided as a NPM package and written in Typescript as well.</li>
+  </ul>
+  <p>All these fine little things run in a self hosted environment relying on Debian, nginx and mongodb. The challenge was to put this all together and secure on a 100% home made config.</p>
+  <h4>Security concerns</h4>
+  <p>The implementation allowed me to experiment some pretty things like json web tokens (JWT) and HTTPS using let's encrypt.</p>
+  <h4>Repositories</h4>
+  <p>The codebase is freely accessible. Feel free to have a look to the repos.</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-header">Discord Bot repository</div>
+          <div class="card-body">
+            <h5 class="card-title"><a href="https://github.com/jpb06/kuBot-ts" target="_blank">kuBot-ts</a></h5>
+            <span class="badge badge-pill badge-secondary">discord.js</span>&nbsp;
+            <span class="badge badge-pill badge-secondary">typescript</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-header">Website repository</div>
+          <div class="card-body">
+            <h5 class="card-title"><a href="https://github.com/jpb06/kubot-ws-angular" target="_blank">kuBot-ws-angular</a></h5>
+            <span class="badge badge-pill badge-secondary">Angular 6</span>&nbsp;
+            <span class="badge badge-pill badge-secondary">Bootstrap 4</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-header">Frontend API repository</div>
+          <div class="card-body">
+            <h5 class="card-title"><a href="https://github.com/jpb06/kubot-ws-api" target="_blank">kuBot-ws-api</a></h5>
+            <span class="badge badge-pill badge-secondary">express</span>&nbsp;
+            <span class="badge badge-pill badge-secondary">typescript</span>&nbsp;
+            <span class="badge badge-pill badge-secondary">jwt authentication</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
