@@ -36,7 +36,8 @@ export class GuildRegionsComponent implements OnInit {
     regionName: [null, Validators.required],
     watchedSystems: [null, Validators.required],
     systemSearch: [null],
-    alwaysDisplay: [null]
+    alwaysDisplay: [null],
+    showEveryone: [null]
   });
   public watchedRegions: Array<WatchedRegion> = [];
   public initialConfiguration: string;
@@ -58,7 +59,8 @@ export class GuildRegionsComponent implements OnInit {
         regionName: '',
         watchedSystems: [],
         systemSearch: '',
-        alwaysDisplay: false
+        alwaysDisplay: false,
+        showEveryone: false
       });
 
       let allStarSystems = await this.staticDataService.getStarSystems();
@@ -133,6 +135,7 @@ export class GuildRegionsComponent implements OnInit {
     }));
 
     this.regionForm.get('alwaysDisplay').reset(region.alwaysDisplay);
+    this.regionForm.get('showEveryone').reset(region.showPlayers);
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
@@ -145,7 +148,7 @@ export class GuildRegionsComponent implements OnInit {
 
   setRegion() {
     this.alertService.clear();
-    if (this.regionsSummaryChild.selectedIndex === -1) { // case add
+    if (this.regionsSummaryChild === undefined || this.regionsSummaryChild.selectedIndex === -1) { // case add
       if (this.watchedRegions.find(el => el.name === this.regionForm.value.regionName)) {
         this.alertService.report(`The name '${this.regionForm.value.regionName}' is already being used. Names must be unique.`, AlertType.Neutral);
       } else {
@@ -153,14 +156,15 @@ export class GuildRegionsComponent implements OnInit {
           guildId: this.authenticationService.getGuildId(),
           name: this.regionForm.value.regionName,
           alwaysDisplay: this.regionForm.value.alwaysDisplay,
-          systems: this.regionForm.value.watchedSystems.map(el => el.value),
-          showPlayers: false
+          showPlayers: this.regionForm.value.showEveryone,
+          systems: this.regionForm.value.watchedSystems.map(el => el.value)
         });
       }
     } else { // case mod
       let index = this.regionsSummaryChild.selectedIndex;
       this.watchedRegions[index].name = this.regionForm.value.regionName;
       this.watchedRegions[index].alwaysDisplay = this.regionForm.value.alwaysDisplay;
+      this.watchedRegions[index].showPlayers = this.regionForm.value.showEveryone;
       this.watchedRegions[index].systems = this.regionForm.value.watchedSystems.map(el => el.value);
     }
 
@@ -172,11 +176,14 @@ export class GuildRegionsComponent implements OnInit {
   }
 
   private resetForm() {
-    this.regionsSummaryChild.selectedIndex = -1;
+    if (this.regionsSummaryChild !== undefined) {
+      this.regionsSummaryChild.selectedIndex = -1;
+    }
     this.regionForm.get('regionName').reset();
     this.regionForm.get('systemSearch').reset('');
     this.regionForm.get('watchedSystems').reset([]);
     this.regionForm.get('alwaysDisplay').reset(false);
+    this.regionForm.get('showEveryone').reset(false);
     this.regionFormTitle = this.addFormTitle;
     this.formButtonText = this.formButtonAddText;
     this.configurationChanged = this.verifyIfConfigurationChanged();

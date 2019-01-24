@@ -100,7 +100,7 @@ export class GuildFactionsComponent implements OnInit {
 
   setFaction() {
     this.alertService.clear();
-    if (this.factionsSummaryChild.selectedIndex === -1) { // case add
+    if (this.factionsSummaryChild === undefined || this.factionsSummaryChild.selectedIndex === -1) { // case add
       if (this.watchedFactions.find(el => el.name === this.factionForm.value.factionName)) {
         this.alertService.report(`The name '${this.factionForm.value.factionName}' is already being used. Names must be unique.`, AlertType.Neutral);
       } else {
@@ -126,7 +126,9 @@ export class GuildFactionsComponent implements OnInit {
   }
 
   private resetForm() {
-    this.factionsSummaryChild.selectedIndex = -1;
+    if (this.factionsSummaryChild !== undefined) {
+      this.factionsSummaryChild.selectedIndex = -1;
+    }
     this.factionForm.get('factionName').reset();
     this.factionForm.get('tag').reset();
     this.factionForm.get('watchedTags').reset([]);
