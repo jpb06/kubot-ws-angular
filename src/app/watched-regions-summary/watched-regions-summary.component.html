@@ -15,6 +15,9 @@
         <h6 *ngIf="region.alwaysDisplay">
           Always displayed
         </h6>
+        <h6 *ngIf="region.showPlayers">
+          All players displayed
+        </h6>
         <div class="row justify-content-center">
           <app-watched-summary-item *ngFor="let system of region.systems"
                                     [value]="system">
