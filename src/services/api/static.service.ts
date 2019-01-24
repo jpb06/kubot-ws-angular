@@ -33,4 +33,10 @@ export class StaticDataService extends BaseApiService {
 
     return this.starSystems;
   }
+
+  async getGuildsCount(): Promise<number> {
+
+    let result = await this.http.get<any>(`${this.host}/static/guildscount`).toPromise();
+    return result.data;
+  }
 }
